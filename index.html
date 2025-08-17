@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="icon.png">
+
+  <title>Assignments Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 400px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .assignment-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: #eef6ff;
+      border: 1px solid #d0e4ff;
+      border-radius: 10px;
+      text-align: left;
+      display: none;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Assignments Portal</h2>
+    <input type="text" id="jntuNo" placeholder="Enter your JNTU Number" required>
+    <button onclick="getAssignment()">Get Assignment</button>
+    
+    <div class="assignment-box" id="assignmentBox"></div>
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <script>
+    // Example assignments database (key = JNTU number)
+    const assignments = {
+      "23341A4520": "Complete a report on Cloud Computing (min 3 pages).",
+      "23341A4502": "Create a PowerPoint presentation on Artificial Intelligence (10 slides).",
+      "23341A4501": "Write a program in C to implement a calculator."
+    };
+
+    function getAssignment() {
+      const jntuNo = document.getElementById("jntuNo").value.trim();
+      const assignmentBox = document.getElementById("assignmentBox");
+      const errorMsg = document.getElementById("errorMsg");
+
+      assignmentBox.style.display = "none";
+      errorMsg.textContent = "";
+
+      if(assignments[jntuNo]) {
+        assignmentBox.innerHTML = `
+          <h3>JNTU No: ${jntuNo}</h3>
+          <p><strong>Your Assignment:</strong></p>
+          <p>${assignments[jntuNo]}</p>
+        `;
+        assignmentBox.style.display = "block";
+      } else {
+        errorMsg.textContent = "❌ No assignment found for this JNTU Number.";
+      }
+    }
+  </script>
+</body>
+</html>
